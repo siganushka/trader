@@ -1,0 +1,28 @@
+{
+    "name": "siganushka/trader",
+    "description": "A library for ecommerce",
+    "type": "library",
+    "authors": [
+        {
+            "name": "siganushka",
+            "email": "siganushka@gmail.com"
+        }
+    ],
+    "require": {
+        "doctrine/collections": "^1.6"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Siganushka\\Trader\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Siganushka\\Trader\\Tests\\": "tests/"
+        }
+    },
+    "license": "MIT"
+}
