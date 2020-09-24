@@ -18,4 +18,13 @@ class AdjustmentTraitTest extends TestCase
         $adjustment->setAmount(null);
         $this->assertNull($adjustment->getAmount());
     }
+
+    public function testAmountZeroException()
+    {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('The amount cannot be zero.');
+
+        $adjustment = new Adjustment();
+        $adjustment->setAmount(0);
+    }
 }

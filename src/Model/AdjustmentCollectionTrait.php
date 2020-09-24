@@ -2,19 +2,12 @@
 
 namespace Siganushka\Trader\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 trait AdjustmentCollectionTrait
 {
-    private $adjustmentsTotal;
+    private $adjustmentsTotal = 0;
     private $adjustments;
-
-    public function __construct()
-    {
-        $this->adjustmentsTotal = 0;
-        $this->adjustments = new ArrayCollection();
-    }
 
     public function getAdjustmentsTotal(): int
     {

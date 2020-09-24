@@ -9,9 +9,7 @@ use Siganushka\Trader\Tests\Fixtures\AdjustmentCollection;
 class AdjustmentCollectionTraitTest extends TestCase
 {
     /**
-     * @dataProvider getMockAmounts
-     *
-     * @return void
+     * @dataProvider getMockAdjustments
      */
     public function testAll()
     {
@@ -20,7 +18,7 @@ class AdjustmentCollectionTraitTest extends TestCase
         $this->assertCount(0, $collection->getAdjustments());
 
         $arguments = \func_get_args();
-        $total = array_pop($arguments);
+        $adjustmentsTotal = array_pop($arguments);
 
         foreach ($arguments as $amount) {
             $adjustment = new Adjustment();
@@ -28,19 +26,19 @@ class AdjustmentCollectionTraitTest extends TestCase
             $collection->addAdjustment($adjustment);
         }
 
-        $this->assertSame($total, $collection->getAdjustmentsTotal());
+        $this->assertSame($adjustmentsTotal, $collection->getAdjustmentsTotal());
         $this->assertCount(\count($arguments), $collection->getAdjustments());
     }
 
-    public function getMockAmounts()
+    public function getMockAdjustments()
     {
         return [
             [-10, 5, 5, -30, -30],
-            [0, 3, 3],
+            [3, 3],
             [10, 2, 20, 32],
             [20, 10, 200, 230],
             [50, 9, 450, 509],
-            [100, 12, 112],
+            [100, 12, 300, -10, 3, 405],
         ];
     }
 }
