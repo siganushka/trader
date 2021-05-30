@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Siganushka\Trader\Tests\Fixtures;
 
 use Doctrine\Common\Collections\ArrayCollection;

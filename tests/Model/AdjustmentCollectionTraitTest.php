@@ -1,21 +1,27 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Siganushka\Trader\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use Siganushka\Trader\Tests\Fixtures\Adjustment;
 use Siganushka\Trader\Tests\Fixtures\AdjustmentCollection;
 
-class AdjustmentCollectionTraitTest extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+final class AdjustmentCollectionTraitTest extends TestCase
 {
     /**
      * @dataProvider getMockAdjustments
      */
-    public function testAll()
+    public function testAll(): void
     {
         $collection = new AdjustmentCollection();
-        $this->assertSame(0, $collection->getAdjustmentsTotal());
-        $this->assertCount(0, $collection->getAdjustments());
+        static::assertSame(0, $collection->getAdjustmentsTotal());
+        static::assertCount(0, $collection->getAdjustments());
 
         $arguments = \func_get_args();
         $adjustmentsTotal = array_pop($arguments);
@@ -26,8 +32,8 @@ class AdjustmentCollectionTraitTest extends TestCase
             $collection->addAdjustment($adjustment);
         }
 
-        $this->assertSame($adjustmentsTotal, $collection->getAdjustmentsTotal());
-        $this->assertCount(\count($arguments), $collection->getAdjustments());
+        static::assertSame($adjustmentsTotal, $collection->getAdjustmentsTotal());
+        static::assertCount(\count($arguments), $collection->getAdjustments());
     }
 
     public function getMockAdjustments()

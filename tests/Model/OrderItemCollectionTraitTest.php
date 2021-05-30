@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Siganushka\Trader\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
@@ -7,18 +9,20 @@ use Siganushka\Trader\Tests\Fixtures\OrderItem;
 use Siganushka\Trader\Tests\Fixtures\OrderItemCollection;
 use Siganushka\Trader\Tests\Fixtures\Variant;
 
-class OrderItemCollectionTraitTest extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+final class OrderItemCollectionTraitTest extends TestCase
 {
     /**
      * @dataProvider getMockItems
-     *
-     * @return void
      */
-    public function testAll()
+    public function testAll(): void
     {
         $collection = new OrderItemCollection();
-        $this->assertSame(0, $collection->getItemsTotal());
-        $this->assertCount(0, $collection->getItems());
+        static::assertSame(0, $collection->getItemsTotal());
+        static::assertCount(0, $collection->getItems());
 
         $arguments = \func_get_args();
         $itemsTotal = array_pop($arguments);
@@ -34,8 +38,8 @@ class OrderItemCollectionTraitTest extends TestCase
             $collection->addItem($item);
         }
 
-        $this->assertSame($itemsTotal, $collection->getItemsTotal());
-        $this->assertCount(\count($arguments), $collection->getItems());
+        static::assertSame($itemsTotal, $collection->getItemsTotal());
+        static::assertCount(\count($arguments), $collection->getItems());
     }
 
     public function getMockItems()

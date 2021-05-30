@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Siganushka\Trader\Model;
 
 use Doctrine\Common\Collections\Collection;

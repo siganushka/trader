@@ -1,25 +1,31 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Siganushka\Trader\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use Siganushka\Trader\Tests\Fixtures\Adjustment;
 
-class AdjustmentTraitTest extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+final class AdjustmentTraitTest extends TestCase
 {
-    public function testAll()
+    public function testAll(): void
     {
         $adjustment = new Adjustment();
-        $this->assertNull($adjustment->getAmount());
+        static::assertNull($adjustment->getAmount());
 
         $adjustment->setAmount(1024);
-        $this->assertSame(1024, $adjustment->getAmount());
+        static::assertSame(1024, $adjustment->getAmount());
 
         $adjustment->setAmount(null);
-        $this->assertNull($adjustment->getAmount());
+        static::assertNull($adjustment->getAmount());
     }
 
-    public function testAmountZeroException()
+    public function testAmountZeroException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The amount cannot be zero.');

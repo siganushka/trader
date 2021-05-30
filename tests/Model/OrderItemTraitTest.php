@@ -1,37 +1,47 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Siganushka\Trader\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use Siganushka\Trader\Tests\Fixtures\OrderItem;
 use Siganushka\Trader\Tests\Fixtures\Variant;
 
-class OrderItemTraitTest extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+final class OrderItemTraitTest extends TestCase
 {
     /**
      * @dataProvider validItemProvider
+     *
+     * @param mixed $price
+     * @param mixed $quantity
+     * @param mixed $subtotal
      */
-    public function testAll($price, $quantity, $subtotal)
+    public function testAll($price, $quantity, $subtotal): void
     {
         $variant = new Variant();
         $variant->setPrice($price);
 
         $item = new OrderItem();
-        $this->assertNull($item->getVariant());
-        $this->assertNull($item->getUnitPrice());
-        $this->assertNull($item->getQuantity());
-        $this->assertSame(0, $item->getSubtotal());
+        static::assertNull($item->getVariant());
+        static::assertNull($item->getUnitPrice());
+        static::assertNull($item->getQuantity());
+        static::assertSame(0, $item->getSubtotal());
 
         $item->setVariant($variant);
         $item->setQuantity($quantity);
 
-        $this->assertSame($variant, $item->getVariant());
-        $this->assertSame($price, $item->getUnitPrice());
-        $this->assertSame($quantity, $item->getQuantity());
-        $this->assertSame($subtotal, $item->getSubtotal());
+        static::assertSame($variant, $item->getVariant());
+        static::assertSame($price, $item->getUnitPrice());
+        static::assertSame($quantity, $item->getQuantity());
+        static::assertSame($subtotal, $item->getSubtotal());
     }
 
-    public function testQuantityLessThanOrEqualZeroException()
+    public function testQuantityLessThanOrEqualZeroException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The quantity cannot be less than or equal to zero.');

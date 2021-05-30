@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Siganushka\Trader\Model;
 
 trait OrderItemTrait
@@ -29,7 +31,7 @@ trait OrderItemTrait
         return $this->unitPrice;
     }
 
-    public function setUnitPrice(?int $unitPrice)
+    public function setUnitPrice(?int $unitPrice): void
     {
         throw new \BadMethodCallException('The unitPrice cannot be modified anymore.');
     }

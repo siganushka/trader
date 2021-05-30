@@ -1,25 +1,34 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Siganushka\Trader\Tests\Model;
 
 use PHPUnit\Framework\TestCase;
 use Siganushka\Trader\Tests\Fixtures\Variant;
 
-class VariantTraitTest extends TestCase
+/**
+ * @internal
+ * @coversNothing
+ */
+final class VariantTraitTest extends TestCase
 {
     /**
      * @dataProvider validPriceProvider
+     *
+     * @param mixed $price
+     * @param mixed $intPrice
      */
-    public function testAll($price, $intPrice)
+    public function testAll($price, $intPrice): void
     {
         $variant = new Variant();
-        $this->assertNull($variant->getPrice());
+        static::assertNull($variant->getPrice());
 
         $variant->setPrice($price);
-        $this->assertSame($intPrice, $variant->getPrice());
+        static::assertSame($intPrice, $variant->getPrice());
     }
 
-    public function testPriceLessThanZeroException()
+    public function testPriceLessThanZeroException(): void
     {
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('The price cannot be less than zero.');
